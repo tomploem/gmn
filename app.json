@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "715b157f-99a2-42e9-8416-25bd24ead3f1"
+      }
+    },
+    "owner": "endohq"
   }
 }
