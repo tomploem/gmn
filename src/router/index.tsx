@@ -8,16 +8,17 @@ import SecondPage from "../screens/second-page";
 const Stack = createNativeStackNavigator();
 
 export function RouteWrapper () {
-
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{navigationBarHidden: true}}>
         <Stack.Screen
           name="Home"
+          // @ts-ignore
           component={Home}
         />
         <Stack.Screen
           name="SecondPage"
+          // @ts-ignore
           component={SecondPage}
         />
       </Stack.Navigator>
