@@ -1,16 +1,15 @@
 import {Text, View} from "react-native";
 import {Props} from "../../typings/router";
-import {Camera, useCameraDevice, useCameraPermission} from "react-native-vision-camera";
 import React, {useEffect} from "react";
 import tailwind from "twrnc";
+import {Camera, useCameraDevice, useCameraPermission} from "react-native-vision-camera";
 
 
-export default function SecondPage ({ route }: Props<'SecondPage'>) {
+export default function Record ({ route }: Props<'SecondPage'>) {
   const device = useCameraDevice('back')
   const { hasPermission, requestPermission } = useCameraPermission()
 
   useEffect(() => {
-    console.log(hasPermission);
     if (!hasPermission) {
       handleRequestPermission()
     }

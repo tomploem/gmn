@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import Home from "../screens/home";
-import SecondPage from "../screens/second-page";
+import CreatePost from "../screens/createPost";
 
 
 const Stack = createNativeStackNavigator();
@@ -17,9 +17,9 @@ export function RouteWrapper () {
           component={Home}
         />
         <Stack.Screen
-          name="SecondPage"
+          name="CreatePost"
           // @ts-ignore
-          component={SecondPage}
+          component={CreatePost}
         />
       </Stack.Navigator>
     </NavigationContainer>

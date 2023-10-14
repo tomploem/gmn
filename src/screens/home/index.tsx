@@ -6,7 +6,7 @@ import {Props} from "../../typings/router";
 export default function Home ({ navigation }: Props<'Home'>) {
 
   function handleOnPress () {
-    navigation.navigate('SecondPage', { id: 'testId' })
+    navigation.navigate('CreatePost', { id: 'testId' })
   }
 
   return (
