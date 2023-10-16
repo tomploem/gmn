@@ -1,14 +1,13 @@
-import {Pressable, SafeAreaView, Text, View} from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import {Props} from "../../typings/router";
 import React, { useState} from "react";
 import tailwind from "twrnc";
 
 import {useIpfs} from "../../hooks/useIpfs";
-import {LoadingOutlined} from "../../components/icons/LoadingOutlined";
-import ContentPicker from "./contentUploader";
 import {GetLocation} from "../../components/location";
+import {Button} from "../../components/button";
 
-export default function CreatePost ({ navigation }: Props<'CreatePost'>) {
+export default function CreatePost (_: Props<'CreatePost'>) {
   const [location, setLocation] = useState<any>();
   const { upload, loading, data, error } = useIpfs();
 
@@ -29,15 +28,7 @@ export default function CreatePost ({ navigation }: Props<'CreatePost'>) {
           <Text>{JSON.stringify(error)}</Text>
           <Text>{data}</Text>
         </View>
-        <Pressable
-          disabled={loading}
-          style={tailwind`w-full mt-auto ${loading ? 'bg-gray-600' : 'bg-black'} py-3.5 border-0 rounded flex items-center`}
-          onPress={addPost}>
-            {
-              loading ? <LoadingOutlined /> :
-                <Text style={tailwind`text-white font-bold`}>Create</Text>
-            }
-        </Pressable>
+        <Button loading={loading} label="Create" onPress={addPost} />
       </View>
     </SafeAreaView>
   )
