@@ -9,7 +9,8 @@ const svgBaseClass =
 export interface IconProps {
   viewBox?: string;
   style?: ViewStyle;
-
+  width?: number;
+  height?: number;
   children?: React.ReactNode;
 }
 
@@ -19,11 +20,11 @@ const baseSvgProps = {
   viewBox: '',
 };
 
-const baseSvgTextSize = '20px';
-
 export function Icon({
   children,
   style = StyleSheet.create({}),
+  width = 20,
+  height = 20,
   viewBox = '0 0 1024 1024',
 }: IconProps) {
   return (
@@ -35,8 +36,8 @@ export function Icon({
       ]}
       {...baseSvgProps}
       viewBox={viewBox}
-      width={baseSvgTextSize}
-      height={baseSvgTextSize}
+      width={`${width}px`}
+      height={`${height}px`}
     >
       {children}
     </Svg>

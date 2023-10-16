@@ -6,17 +6,27 @@ import Home from "../screens/home";
 import Login from "../screens/login";
 import CreatePost from "../screens/createPost";
 import {useMetaMask} from "../providers/useMetaMask";
-
+import Profile from "../screens/profile";
+import {HomeOutlined} from "../components/icons/HomeOutlined";
+import {UserOutlined} from "../components/icons/UserOutlined";
+import tailwind from "twrnc";
+import {PlusCircleOutlined} from "../components/icons/PlusCircleOutlined";
+import {IconProps} from "../components/icons/Icon";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export function RouteWrapper () {
   const { isAuthenticated } = useMetaMask();
+
+  function createStyleForTabBarIcon(Icon: (props: IconProps) => React.JSX.Element, focused: boolean) {
+    return <Icon style={tailwind`${focused ? 'text-black' : 'text-gray-500'}`} />
+  }
+
   return (
     <NavigationContainer>
       {
-        !isAuthenticated ? (
+        isAuthenticated ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen
               name="Login"
@@ -25,16 +35,33 @@ export function RouteWrapper () {
             />
           </Stack.Navigator>
         ) : (
-          <Tab.Navigator screenOptions={{ headerShown: false }}>
+          <Tab.Navigator screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+          }}>
             <Tab.Screen
               name="Home"
+              options={{
+                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(HomeOutlined, focused)
+              }}
               // @ts-ignore
               component={Home}
             />
             <Tab.Screen
+              options={{
+                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(PlusCircleOutlined, focused),
+              }}
               name="CreatePost"
               // @ts-ignore
               component={CreatePost}
+            />
+            <Tab.Screen
+              options={{
+                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(UserOutlined, focused)
+              }}
+              name="Profile"
+              // @ts-ignore
+              component={Profile}
             />
           </Tab.Navigator>
         )
