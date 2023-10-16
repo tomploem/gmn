@@ -3,9 +3,6 @@ module.exports = function (api) {
   return {
     presets: [
       "babel-preset-expo"
-    ],
-    plugins: [
-      ["@babel/plugin-transform-private-methods", { "loose": true }]
-    ],
+    ]
   };
 };

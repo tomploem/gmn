@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Svg from "react-native-svg";
 import tailwind from "twrnc";
-import { ViewStyle } from "react-native";
+import {StyleSheet, ViewStyle} from "react-native";
 
 const svgBaseClass =
   tailwind`overflow-hidden resize-x h-auto fill-current flex-no-shrink fill-current inline-block not-italic`;
 
 export interface IconProps {
   viewBox?: string;
-  style?: ViewStyle[];
+  style?: ViewStyle;
 
   children?: React.ReactNode;
 }
@@ -23,7 +23,7 @@ const baseSvgTextSize = '20px';
 
 export function Icon({
   children,
-  style,
+  style = StyleSheet.create({}),
   viewBox = '0 0 1024 1024',
 }: IconProps) {
   return (
@@ -31,7 +31,7 @@ export function Icon({
       style={[
         { fill: 'currentColor' },
         svgBaseClass,
-        ...(style || [])
+        style
       ]}
       {...baseSvgProps}
       viewBox={viewBox}
