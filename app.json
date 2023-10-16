@@ -57,6 +57,12 @@
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to use your photos."
         }
+      ],
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox"
+        }
       ]
     ],
     "owner": "endohq"

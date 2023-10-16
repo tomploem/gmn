@@ -12,6 +12,7 @@ import {UserOutlined} from "../components/icons/UserOutlined";
 import tailwind from "twrnc";
 import {PlusCircleOutlined} from "../components/icons/PlusCircleOutlined";
 import {IconProps} from "../components/icons/Icon";
+import {LocationOutlined} from "../components/icons/LocationOutlined";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,7 +43,7 @@ export function RouteWrapper () {
             <Tab.Screen
               name="Home"
               options={{
-                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(HomeOutlined, focused)
+                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(LocationOutlined, focused)
               }}
               // @ts-ignore
               component={Home}

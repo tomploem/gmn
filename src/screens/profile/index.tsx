@@ -15,7 +15,7 @@ export default function Profile ({ navigation }: Props<'Profile'>) {
     <SafeAreaView >
       <View style={tailwind`px-4 py-12 h-full`}>
         <View style={tailwind`bg-white p-4 rounded w-full mb-10`}>
-          <Text style={tailwind`font-bold text-lg=`}>Settings</Text>
+          <Text style={tailwind`font-bold text-lg`}>Settings</Text>
         </View>
         <Button onPress={handleLogout} label="logout" />
       </View>
