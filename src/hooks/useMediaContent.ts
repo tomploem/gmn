@@ -7,7 +7,7 @@ const arr: MediaContent[] = [
     location: { latitude: 51.0258, longitude: 4.4779 }
   },
   {
-    id: '2g',
+    id: '2',
     location: { latitude: 51.0182, longitude: 4.4826 }
   }
 ]

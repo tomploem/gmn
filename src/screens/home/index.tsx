@@ -6,6 +6,7 @@ import tailwind from "twrnc";
 import Mapbox, { ShapeSource, HeatmapLayer, Camera, MapView, CircleLayer } from '@rnmapbox/maps';
 import Config from "react-native-config";
 import {useMediaContent} from "../../hooks/useMediaContent";
+import {OnPressEvent} from "@rnmapbox/maps/lib/typescript/types/OnPressEvent";
 
 Mapbox.setAccessToken(Config.MAPBOX_API_KEY || '');
 
@@ -24,8 +25,12 @@ export default function Home ({ navigation }: Props<'Home'>) {
 
   const heatmapRadius = Math.max(10, 70 - (2 * zoomLevel)); // Adjusted formula
 
-  function handleOnPress () {
-    navigation.navigate('CreatePost', { id: 'testId' })
+  function handleOnPress (event: OnPressEvent) {
+    const feature = event.features[0];
+    const id = feature?.id?.toString();
+    if (id) {
+      navigation.navigate('Post', { id });
+    }
   }
 
   return (
@@ -35,10 +40,7 @@ export default function Home ({ navigation }: Props<'Home'>) {
           <Camera zoomLevel={zoomLevel} centerCoordinate={[4.4780, 51.0250]} />
           <ShapeSource
             id="heatmapSource"
-            onPress={(e) => {
-              const feature = e.features[0];
-              console.log('Clicked feature:', feature.id);
-            }}
+            onPress={handleOnPress}
             shape={{
               type: 'FeatureCollection',
               features: data.map((item) => ({
