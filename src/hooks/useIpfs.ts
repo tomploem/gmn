@@ -1,6 +1,7 @@
 import Config from 'react-native-config';
 import { Buffer } from "buffer";
 import {useEffect, useMemo, useState} from "react";
+import {RequestState} from "../typings/app";
 
 const projectId = Config.INFURA_API_KEY;
 const projectSecret = Config.INFURA_API_SECRET;
@@ -13,15 +14,8 @@ const headers = {
   Authorization: `Basic ${base64}`,
 };
 
-export type RequestState = {
-  status: 'idle' | 'loading' | 'success' | 'error',
-  data?: string;
-  error?: Error;
-  input?: Record<string, any>;
-}
-
 export function useIpfs() {
-  const [uploadState, setUploadState] = useState<RequestState>({
+  const [uploadState, setUploadState] = useState<RequestState<string>>({
     status: 'idle'
   });
 
