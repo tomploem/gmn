@@ -2,7 +2,6 @@ import {Pressable, SafeAreaView, Text, View} from "react-native";
 import React from "react";
 import {Props} from "../../typings/router";
 import tailwind from "twrnc";
-import {Button} from "../../components/button";
 import {LeftOutlined} from "../../components/icons/LeftOutlined";
 
 

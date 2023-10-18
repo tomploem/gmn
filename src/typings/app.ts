@@ -14,7 +14,6 @@ export type RequestState<T> = {
   status: 'idle' | 'loading' | 'success' | 'error',
   data?: T;
   error?: Error;
-  input?: Record<string, any>;
 }
 
 export type AppLocation = {
