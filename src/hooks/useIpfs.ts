@@ -28,6 +28,14 @@ export function useIpfs<T>(type: UploadType) {
   });
 
   useEffect(() => {
+    return () => {
+      setUploadState({
+        status: 'idle'
+      })
+    }
+  }, []);
+
+  useEffect(() => {
     if (uploadState?.status === 'loading' && uploadState?.input) {
       upload(uploadState.input)
     }
@@ -35,7 +43,6 @@ export function useIpfs<T>(type: UploadType) {
 
   async function initUpload (input: Record<string, any>) {
     if (input) {
-      console.log('init upload')
       setUploadState({
         status: 'loading',
         input,
@@ -93,7 +100,7 @@ export function useIpfs<T>(type: UploadType) {
         setUploadState({
           status: 'error',
           data: undefined,
-          error: undefined,
+          error: res as any,
         })
       }
     } catch (error) {

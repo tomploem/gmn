@@ -15,7 +15,7 @@ export function Button ({ onPress, disabled = false, loading = false, label }: B
   return (
     <Pressable
       disabled={disabled}
-      style={tailwind`w-full mt-auto ${isInactive ? 'bg-gray-600' : 'bg-black'} py-3.5 border-0 rounded flex items-center`}
+      style={tailwind`w-full ${isInactive ? 'bg-gray-600' : 'bg-black'} py-3.5 border-0 rounded flex items-center`}
       onPress={onPress}>
         {
           loading

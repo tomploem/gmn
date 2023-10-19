@@ -9,3 +9,10 @@ type RootStackParamList = {
 };
 
 export type Props<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
+
+type CreateRoutePropsParamList = {
+  SelectContent: undefined;
+  UploadContent: undefined;
+};
+
+export type CreateRouteProps<T extends keyof CreateRoutePropsParamList> = NativeStackScreenProps<CreateRoutePropsParamList, T>;

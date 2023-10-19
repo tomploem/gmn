@@ -1,19 +1,50 @@
-import { Text, View} from "react-native";
-import React, { useEffect } from "react";
+import {Animated, Text, View} from "react-native";
+import React, {useEffect, useState} from "react";
 import tailwind from "twrnc";
 
 import * as Location from 'expo-location';
+import {LocationObjectCoords} from "expo-location";
+import Config from "react-native-config";
+import {LoadingOutlined} from "../icons/LoadingOutlined";
 
 interface GetLocationProps {
-  setLocation(location: any): void;
-  location: any;
+  setCoordinates(location: LocationObjectCoords): void;
+  coordinates?: LocationObjectCoords;
 }
 
-export function GetLocation ({ setLocation, location }: GetLocationProps) {
-
+export function GetLocation ({ setCoordinates, coordinates }: GetLocationProps) {
+  const [address, setAddress] = useState();
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     getLocation();
   }, []);
+
+  useEffect(() => {
+    if (!coordinates) return;
+    fetchAddress(coordinates);
+  }, [coordinates]);
+
+  async function fetchAddress(location: LocationObjectCoords) {
+    try {
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location.longitude},${location.latitude}.json?access_token=${Config.MAPBOX_API_KEY || ''}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.features && data.features.length > 0) {
+        // Grab the first result
+        const address = data.features[0].place_name;
+        setAddress(address);
+      } else {
+        throw new Error("Could not fetch address");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
 
   async function getLocation () {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -23,22 +54,16 @@ export function GetLocation ({ setLocation, location }: GetLocationProps) {
     }
 
     let location = await Location.getCurrentPositionAsync({});
-    setLocation(location.coords);
+    setCoordinates(location.coords);
   }
 
   return (
-    <View style={tailwind`flex-col p-4 bg-white border border-gray-50 rounded mb-4 `}>
-      <View style={tailwind`flex-row items-center text-sm`}>
-        <Text style={tailwind`font-bold mr-2`}>longitude:</Text>
-        <Text>{location?.longitude}</Text>
-      </View>
-      <View style={tailwind`flex-row items-center text-sm`}>
-        <Text style={tailwind`font-bold mr-2`}>latitude:</Text>
-        <Text>{location?.latitude}</Text>
-      </View>
-      <View style={tailwind`flex-row items-center text-sm`}>
-        <Text style={tailwind`font-bold mr-2`}>altitude:</Text>
-        <Text>{location?.altitude}</Text>
+    <View style={tailwind`flex-col p-4 bg-gray-100 border border-gray-50 rounded mb-4`}>
+      <View style={tailwind`text-sm`}>
+        <Text style={tailwind`font-bold text-xs mb-1`}>Address</Text>
+        {
+          loading ? <LoadingOutlined /> : <Text style={tailwind`text-xs text-gray-700`}>{address}</Text>
+        }
       </View>
     </View>
 )

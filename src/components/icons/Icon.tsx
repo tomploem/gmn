@@ -4,7 +4,7 @@ import tailwind from "twrnc";
 import {StyleSheet, ViewStyle} from "react-native";
 
 const svgBaseClass =
-  tailwind`overflow-hidden h-auto flex fill-current not-italic`;
+  tailwind`overflow-hidden h-auto flex not-italic`;
 
 export interface IconProps {
   viewBox?: string;

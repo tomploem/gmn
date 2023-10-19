@@ -36,7 +36,7 @@ export default function Home ({ navigation }: Props<'Home'>) {
   return (
     <SafeAreaView >
       <View style={tailwind`h-full`}>
-        <MapView style={tailwind`h-full flex-1`} onRegionDidChange={onRegionDidChange} ref={mapRef}>
+        <MapView style={tailwind`h-full flex-1`} onMapIdle={onRegionDidChange} ref={mapRef}>
           <Camera zoomLevel={zoomLevel} centerCoordinate={[4.4780, 51.0250]} />
           <ShapeSource
             id="heatmapSource"

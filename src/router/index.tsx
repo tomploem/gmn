@@ -4,7 +4,6 @@ import React from "react";
 import {NavigationContainer, } from "@react-navigation/native";
 import Home from "../screens/home";
 import Login from "../screens/login";
-import CreatePost from "../screens/createPost";
 import {useMetaMask} from "../providers/useMetaMask";
 import Profile from "../screens/profile";
 import {UserOutlined} from "../components/icons/UserOutlined";
@@ -13,6 +12,7 @@ import {PlusCircleOutlined} from "../components/icons/PlusCircleOutlined";
 import {IconProps} from "../components/icons/Icon";
 import {LocationOutlined} from "../components/icons/LocationOutlined";
 import PostPage from "../screens/post";
+import {CreateContent} from "../screens/create";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -28,6 +28,22 @@ function UnAuthenticatedStack () {
     </Stack.Navigator>
   )
 }
+
+const CreateNavigator = () => (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        presentation: "card",
+        contentStyle: tailwind`bg-white/50 mt-10`,
+    }}>
+        <Stack.Screen
+          options={{ animation: 'slide_from_bottom' }}
+          name="CreateContent"
+          // @ts-ignore
+          component={CreateContent}
+        />
+    </Stack.Navigator>
+);
 
 export function RouteWrapper () {
   const { isAuthenticated } = useMetaMask();
@@ -60,34 +76,36 @@ export function RouteWrapper () {
         isAuthenticated ? (
           <UnAuthenticatedStack />
         ) : (
-          <Tab.Navigator screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-          }}>
-            <Tab.Screen
-              name="Map"
-              options={{
-                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(LocationOutlined, focused)
-              }}
-              component={MapStackNavigator}
-            />
-            <Tab.Screen
-              options={{
-                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(PlusCircleOutlined, focused),
-              }}
-              name="CreatePost"
-              // @ts-ignore
-              component={CreatePost}
-            />
-            <Tab.Screen
-              options={{
-                tabBarIcon: ({ focused }) => createStyleForTabBarIcon(UserOutlined, focused)
-              }}
-              name="Profile"
-              // @ts-ignore
-              component={Profile}
-            />
-          </Tab.Navigator>
+          <>
+            <Tab.Navigator screenOptions={{
+              headerShown: false,
+              tabBarShowLabel: false,
+            }}>
+              <Tab.Screen
+                name="Map"
+                options={{
+                  tabBarIcon: ({ focused }) => createStyleForTabBarIcon(LocationOutlined, focused)
+                }}
+                component={MapStackNavigator}
+              />
+              <Tab.Screen
+                options={{
+                  tabBarIcon: ({ focused }) => createStyleForTabBarIcon(PlusCircleOutlined, focused),
+                }}
+
+                name="CreatePost"
+                component={CreateNavigator}
+              />
+              <Tab.Screen
+                options={{
+                  tabBarIcon: ({ focused }) => createStyleForTabBarIcon(UserOutlined, focused)
+                }}
+                name="Profile"
+                // @ts-ignore
+                component={Profile}
+              />
+            </Tab.Navigator>
+          </>
         )
       }
     </NavigationContainer>
