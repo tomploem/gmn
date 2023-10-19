@@ -6,16 +6,7 @@ import UploadContent from "./upload";
 import {RequestState} from "../../typings/app";
 import {Props} from "../../typings/router";
 
-// Define the shape of the context state
-interface CreateContextState {
-  locationCid: string;
-  setLocationCid(location: LocationObjectCoords): void;
-  imageCid: string;
-  setImageCid(image: string): void;
-  create(): void;
-}
-
-export function CreateContent ({ navigation }: Props<'CreatePost'>) {
+export function CreateContent ({ navigation }: Props<'CreateContent'>) {
   const [locationCid, setLocationCid] = useState<string>();
   const [imageCid, setImageCid] = useState<string>();
   const [requestState, setRequestState] = useState<RequestState<string>>({

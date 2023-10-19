@@ -12,7 +12,6 @@ const URI = 'https://ipfs.infura.io:5001/api/v0';
 const base64 = Buffer.from(`${projectId}:${projectSecret}`).toString('base64');
 
 const headers = {
-  'Content-Type': 'application/json',
   Authorization: `Basic ${base64}`,
 };
 
@@ -22,7 +21,7 @@ type IpfsRequestState<T> = {
   input?: Record<string, any>;
 } & RequestState<T>;
 
-export function useIpfs<T>(type: UploadType) {
+export function useIpfsWrite<T>(type: UploadType) {
   const [uploadState, setUploadState] = useState<IpfsRequestState<T>>({
     status: 'idle',
   });
@@ -51,8 +50,6 @@ export function useIpfs<T>(type: UploadType) {
   }
 
   async function prepareFileUpload (uri: string): Promise<BodyInit_> {
-    const base64 = await blobToBase64(uri);
-
     const formData = new FormData();
     formData.append('file', {
       name: 'myfile.jpg',

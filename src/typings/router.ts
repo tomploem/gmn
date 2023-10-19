@@ -3,7 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
-  CreatePost: undefined;
+  CreateContent: undefined;
   Profile: undefined;
   Post: { id: string };
 };

@@ -4,7 +4,7 @@ import tailwind from "twrnc";
 
 import {Button} from "../../../components/button";
 import {GetLocation} from "../../../components/location";
-import {useIpfs} from "../../../hooks/useIpfs";
+import {useIpfsWrite} from "../../../hooks/useIpfsWrite";
 import {LocationObjectCoords} from "expo-location";
 import {CheckOutlined} from "../../../components/icons/CheckOutlined";
 
@@ -16,7 +16,7 @@ interface UploadContentProps {
 export default function UploadContent ({ setLocationCid, imageCid }: UploadContentProps) {
 
   const [coordinates, setCoordinates] = useState<LocationObjectCoords>();
-  const { upload, loading, data, error } = useIpfs<string>('json');
+  const { upload, loading, data, error } = useIpfsWrite<string>('json');
 
   useEffect(() => {
     if (data && data?.length > 0) {

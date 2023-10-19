@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import {Button} from "../../../components/button";
 import {VideoCameraOutlined} from "../../../components/icons/VideoCameraOutlined";
-import {useIpfs} from "../../../hooks/useIpfs";
+import {useIpfsWrite} from "../../../hooks/useIpfsWrite";
 
 interface SelectContentProps {
   imageCid?: string;
@@ -13,7 +13,7 @@ interface SelectContentProps {
 }
 
 export default function SelectContent ({ imageCid, setImageCid }: SelectContentProps) {
-  const { upload, loading, data, error } = useIpfs<string>('image');
+  const { upload, loading, data, error } = useIpfsWrite<string>('image');
 
   useEffect(() => {
     if (data && data?.length > 0) {

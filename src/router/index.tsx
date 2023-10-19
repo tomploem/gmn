@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import React from "react";
-import {NavigationContainer, } from "@react-navigation/native";
+import {NavigationContainer, useFocusEffect,} from "@react-navigation/native";
 import Home from "../screens/home";
 import Login from "../screens/login";
 import {useMetaMask} from "../providers/useMetaMask";
@@ -13,6 +13,7 @@ import {IconProps} from "../components/icons/Icon";
 import {LocationOutlined} from "../components/icons/LocationOutlined";
 import PostPage from "../screens/post";
 import {CreateContent} from "../screens/create";
+import {Props} from "../typings/router";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -45,30 +46,32 @@ const CreateNavigator = () => (
     </Stack.Navigator>
 );
 
+function MapStackNavigator ({ navigation }: Props<'Home'>) {
+
+
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen
+        name="Home"
+        // @ts-ignore
+        component={Home}
+      />
+      <Stack.Screen
+        name="Post"
+        // @ts-ignore
+        component={PostPage} />
+    </Stack.Navigator>
+  );
+};
+
 export function RouteWrapper () {
   const { isAuthenticated } = useMetaMask();
 
   function createStyleForTabBarIcon(Icon: (props: IconProps) => React.JSX.Element, focused: boolean) {
     return <Icon style={tailwind`${focused ? 'text-black' : 'text-gray-500'}`} />
   }
-
-  function MapStackNavigator () {
-    return (
-      <Stack.Navigator screenOptions={{
-        headerShown: false
-      }}>
-        <Stack.Screen
-          name="Home"
-          // @ts-ignore
-          component={Home}
-        />
-        <Stack.Screen
-          name="Post"
-          // @ts-ignore
-          component={PostPage} />
-      </Stack.Navigator>
-    );
-  };
 
   return (
     <NavigationContainer>
