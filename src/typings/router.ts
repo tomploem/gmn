@@ -5,14 +5,8 @@ type RootStackParamList = {
   Login: undefined;
   CreateContent: undefined;
   Profile: undefined;
-  Post: { id: string };
+  ContentItem: { id: string };
+  PostItem: { id: string };
 };
 
 export type Props<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
-
-type CreateRoutePropsParamList = {
-  SelectContent: undefined;
-  UploadContent: undefined;
-};
-
-export type CreateRouteProps<T extends keyof CreateRoutePropsParamList> = NativeStackScreenProps<CreateRoutePropsParamList, T>;

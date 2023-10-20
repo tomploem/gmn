@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import React from "react";
-import {NavigationContainer, useFocusEffect,} from "@react-navigation/native";
+import {NavigationContainer} from "@react-navigation/native";
 import Home from "../screens/home";
 import Login from "../screens/login";
 import {useMetaMask} from "../providers/useMetaMask";
@@ -11,7 +11,8 @@ import tailwind from "twrnc";
 import {PlusCircleOutlined} from "../components/icons/PlusCircleOutlined";
 import {IconProps} from "../components/icons/Icon";
 import {LocationOutlined} from "../components/icons/LocationOutlined";
-import PostPage from "../screens/post";
+import ContentItemPage from "../screens/contentItem";
+import PostItemPage from "../screens/post";
 import {CreateContent} from "../screens/create";
 import {Props} from "../typings/router";
 
@@ -47,8 +48,6 @@ const CreateNavigator = () => (
 );
 
 function MapStackNavigator ({ navigation }: Props<'Home'>) {
-
-
   return (
     <Stack.Navigator screenOptions={{
       headerShown: false
@@ -59,9 +58,15 @@ function MapStackNavigator ({ navigation }: Props<'Home'>) {
         component={Home}
       />
       <Stack.Screen
-        name="Post"
+        name="ContentItem"
         // @ts-ignore
-        component={PostPage} />
+        component={ContentItemPage}
+      />
+      <Stack.Screen
+        name="PostItem"
+        // @ts-ignore
+        component={PostItemPage}
+      />
     </Stack.Navigator>
   );
 };
@@ -85,10 +90,11 @@ export function RouteWrapper () {
               tabBarShowLabel: false,
             }}>
               <Tab.Screen
-                name="Map"
+                name="Home"
                 options={{
                   tabBarIcon: ({ focused }) => createStyleForTabBarIcon(LocationOutlined, focused)
                 }}
+                // @ts-ignore
                 component={MapStackNavigator}
               />
               <Tab.Screen

@@ -29,7 +29,7 @@ export default function Home ({ navigation }: Props<'Home'>) {
     const feature = event.features[0];
     const id = feature?.id?.toString();
     if (id) {
-      navigation.navigate('Post', { id });
+      navigation.navigate('ContentItem', { id });
     }
   }
 

@@ -53,3 +53,15 @@ export type MediaContent = {
   id: string;
   location: AppLocation;
 }
+
+export type Company = {
+  name: string;
+  logoUri: string;
+}
+
+export type Post = {
+  id: string;
+  company: Company;
+  title: string;
+  content: string;
+}
